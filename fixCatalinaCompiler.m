@@ -8,10 +8,13 @@ if ~ismac
 
 end
 
+mex -setup c++
+
 [~,a] = system('system_profiler SPSoftwareDataType');
 
 if ~any(strfind(a,'macOS 10.15'))
 	disp('[abort] Not running on macOS Catalina')
+	return
 end
 
 a = strsplit(a,'\n');
