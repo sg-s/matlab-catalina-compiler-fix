@@ -25,12 +25,16 @@ m = mex.getCompilerConfigurations('C++');
 lines = strsplit(fileread(m.MexOpt),'\n','CollapseDelimiters',false);
 txt = lines(:);
 
-bad_strings = {'10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER'};
+bad_strings = {'10.15','10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER'};
 
+
+[status,good_string] = system('xcrun -sdk macosx --show-sdk-version');
+assert(status==0,'Something went wrong running xcrun. Cannot proceed. Please report this bug. ')
+good_string = strtrim(good_string);
 
 for i = 1:length(bad_strings)
 	for j = 1:length(txt)
-		txt{j} = strrep(txt{j},bad_strings{i},'10.15');
+		txt{j} = strrep(txt{j},bad_strings{i},good_string);
 	end
 end
 
