@@ -25,7 +25,7 @@ m = mex.getCompilerConfigurations('C++');
 lines = strsplit(fileread(m.MexOpt),'\n','CollapseDelimiters',false);
 txt = lines(:);
 
-bad_strings = {'10.15','10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER'};
+bad_strings = {'10.15','10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER','10.15.4.4'};
 
 
 [status,good_string] = system('xcrun -sdk macosx --show-sdk-version');
