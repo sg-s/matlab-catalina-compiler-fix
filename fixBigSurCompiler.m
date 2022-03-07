@@ -1,6 +1,6 @@
 % attempts to fix the mess Apple created
 % in Catalina 
-function fixCatalinaCompiler()
+function fixBigSurCompiler()
 
 if ~ismac
 	disp('[abort] Not running on macOS')
@@ -12,8 +12,8 @@ mex -setup c++
 
 [~,a] = system('system_profiler SPSoftwareDataType');
 
-if ~any(strfind(a,'macOS 10.15'))
-	disp('[abort] Not running on macOS Catalina')
+if ~any(strfind(a,'macOS 11.'))
+	disp('[abort] Not running on macOS Big Sur')
 	return
 end
 
@@ -24,7 +24,8 @@ m = mex.getCompilerConfigurations('C++');
 lines = strsplit(fileread(m.MexOpt),'\n','CollapseDelimiters',false);
 txt = lines(:);
 
-bad_strings = {'10.15','10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER','10.15.4.4'};
+
+bad_strings = {'10.15','10.15.1','10.15.2','10.15.3','10.15.4','10.15.5','10.15.6','10.15.sdk','$SDKVER','10.15.4.4','11.0'};
 
 
 [status,good_string] = system('xcrun -sdk macosx --show-sdk-version');
